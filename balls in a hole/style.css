@@ -20,5 +20,15 @@
     border-radius: 50%;
     position: fixed;
     background-color: blue;
+    z-index: -1;
 
+}
+.points {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    z-index: 2;
+    font-weight: bold;
+    font-size: 20px;
+    color: chocolate;
 }

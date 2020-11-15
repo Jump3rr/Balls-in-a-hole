@@ -24,6 +24,7 @@ onDeviceMove(ev) {
     ballOnPage.style.left = (maxWidth*ball.x/180-10) + "px";
     ballOnPage.style.top = (maxHeight*ball.y/180-10) + "px";
     hole.check(parseInt(ballOnPage.style.left)+10, parseInt(ballOnPage.style.top)+10);
+
     
 }
 }
