@@ -3,6 +3,7 @@ const board = document.querySelector('.board');
 const maxWidth = board.clientWidth - ballOnPage.clientWidth;
 const maxHeight = board.clientHeight - ballOnPage.clientHeight;
 ballOnPage.id = 'ball';
+let points = 0;
 
 window.addEventListener('deviceorientation', onDeviceMove)
 
@@ -10,22 +11,21 @@ const ball = {
     x: 0,
     y: 0
 }
-for(let i=0; i<2; i++)
+window.addEventListener('load', createHole);
+function createHole() {
+for(let i=0; i<10; i++)
 {
     const newHole = document.createElement('div');
     newHole.className ="hole";
-    //newHole.classList.add('holes');
+    document.querySelector('.board').appendChild(newHole);
     newHole.id=i;
     newHole.setAttribute('name', i);
     newHole.id = i;
-    newHole.style.top = Math.random()*maxHeight-20 + "px";
-    newHole.style.left = Math.random()*maxWidth-20 + "px";
-    //console.log(a);
-    //let a = newHole.style.top = Math.floor((maxHeight-0)*Math.random())-20 + "px";
-    //newHole.style.left = Math.floor((maxWidth-0)*Math.random())-20 + "px";
-var ref = document.querySelector('script');
+    newHole.style.top = Math.floor(Math.random()*maxHeight)-20 + "px";
+    newHole.style.left = Math.floor(Math.random()*maxWidth)-20 + "px";
 
-ref.parentNode.insertBefore(newHole, ref);
+
+}
 }
 console.log(maxHeight);
 console.log(maxWidth);
@@ -48,16 +48,28 @@ function onDeviceMove(ev) {
 
     ballOnPage.style.left = (maxWidth*ball.x/180-10) + "px";
     ballOnPage.style.top = (maxHeight*ball.y/180-10) + "px";
-    console.log(ballOnPage.style.left);
-    check(parseInt(ballOnPage.style.left));
+    check(parseInt(ballOnPage.style.left)+10, parseInt(ballOnPage.style.top)+10);
     
 }
 //gameinit();
-function check(width) {
-    const holeLeft = parseInt(document.getElementById('1').style.left);
+let los = Math.floor(Math.random()*10);
 
-    if(width<holeLeft+20 && width>holeLeft-20)
+function check(width, height) {
+
+    const holeLeft = parseInt(document.getElementById(los).style.left)+20;
+    const holeTop = parseInt(document.getElementById(los).style.top)+20;
+    document.getElementById(los).style.backgroundColor = "yellow";
+
+    if(width<holeLeft+10 && width>holeLeft-10 && height<holeTop+10 && height>holeTop-10)
     {
-        alert("wygrales");
+        points +=1;
+        document.getElementById(los).style.backgroundColor="blue";
+        console.log(points);
+        los = Math.floor(Math.random()*10);
+        if(points==10)
+        {
+            alert("YOU WON! Refresh page to restart game.");
+        }
+        return;
     }
 }

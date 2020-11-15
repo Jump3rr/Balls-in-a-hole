@@ -18,8 +18,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    position: relative;
+    position: fixed;
     background-color: blue;
-    top: 0px;
-    left: 0px;
+
 }
